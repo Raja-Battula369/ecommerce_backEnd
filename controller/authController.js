@@ -59,7 +59,7 @@ export const sendRestToken = catchAsync(async (req, res, next) => {
     const secret = user._id + process.env.SECRET;
     const token = jwt.sign({ userID: user._id }, secret, { expiresIn: "15m" });
 
-    const link = `http://localhost:5173/reset/${user._id}/${token}`;
+    const link = `https://ecommerce-nine-jet.vercel.app/reset/${user._id}/${token}`;
     // console.log(link.replace(/\./g, "token"));
     // console.log(link);
 

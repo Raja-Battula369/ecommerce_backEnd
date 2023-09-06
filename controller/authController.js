@@ -70,10 +70,14 @@ export const sendRestToken = catchAsync(async (req, res, next) => {
         html: `<a href=${link}>Click Here</a> to Reset Your Password`
     }
 
-    nodemailerConfig.sendMail(mailOptions, (err, res) => {
-        if (err) return console.log(err);
-        console.log('successfully mail sent to' + res.response);
-    });
+    await new Promise((resolve, reject) => {
+        nodemailerConfig.sendMail(mailOptions, (err, res) => {
+            if (err) return console.log(err);
+            console.log('successfully mail sent to' + res.response);
+            resolve(res.response);
+        });
+    })
+
 
     res.status(200).json({ success: true, message: 'reset password sent' });
 
